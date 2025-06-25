@@ -50,12 +50,12 @@ def shauspinger():
     #             print("Main channel not found!")
 
     async def close_bot():
-        if bot.text_input_task and not bot.text_input_task.done():
-            bot.text_input_task.cancel()  
-            try:
-                await bot.text_input_task
-            except asyncio.CancelledError:
-                pass  
+        #if bot.text_input_task and not bot.text_input_task.done():
+            #bot.text_input_task.cancel()  
+            #try:
+                #await bot.text_input_task
+            #except asyncio.CancelledError:
+                #pass  
 
         await bot.close()
 
