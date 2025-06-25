@@ -7,7 +7,8 @@ import settings
     enabled=True
 )
 async def kys(ctx):
-    if ctx.author.id == settings.THE_SHAUS_ID:
+    if ctx.author.id == settings.THE_SHAUS_ID or ctx.author.id == settings.MILO_ID: 
+        await ctx.send("bluehh")
         await ctx.bot.close_bot()
     else:
         await ctx.send("nu uh")

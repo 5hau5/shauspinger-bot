@@ -19,6 +19,10 @@ RESOURCE_DIR = BASE_DIR / "resources"
 GUILDS_ID = discord.Object(id=int(os.getenv("GUILD")))
 MAIN_CHANNEL_ID = int(os.getenv("MAIN_CHANNEL"))
 THE_SHAUS_ID = int(os.getenv("SHAUS_ID"))
+MILO_ID = int(os.getenv("MILO_ID"))
+
+HYDRUS_API_KEY = os.getenv("HYDRUS_API_KEY")
+HYDRUS_API_URL = "http://127.0.0.1:45869"
 
 LOGGING_CONFIG = {
     "version":1,
