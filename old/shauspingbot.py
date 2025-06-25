@@ -711,4 +711,5 @@ client = MyClient(intents=intents, channel_id=738831293864738975)
 #client.run('')
 
 
-client.run('MTIyNDY3NjY4ODUyMTE5OTYxNg.GAaDfZ.EjKNNoT5ZK6gjg7DOuTotWvNzLBlfal4mnvArQ')
+client.run('') #lsdjbnf;lkjbsdeafb;ljuk
+
