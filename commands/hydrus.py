@@ -7,32 +7,104 @@ import random
 import json
 import urllib.parse
 import responses
+import re
 
 sus_tags = [
-    "bestiality",
-    "female furry",
     "furry",
     "futanari",
-    "male_focus",
     "pee",
     "peeing",
-    "pregnant",
     "trap",
     "yaoi",
-    "loli",
     ]
+
+wtf_tags = [
+    "bestiality",
+    "pregnant",
+]
+
+def encode(tags):
+    return urllib.parse.quote(json.dumps(tags), safe='')
 
 @commands.command(
     name="hydrus-random",
     aliases=["hyr"],
     help="query a random image from shaus hydrus database",
     enabled=True
-)
-async def hydrus(ctx, *, tag_input: str = ""):
+    )
+async def hydrus(
+    ctx, 
+    *, tag_input: str= commands.parameter(default='', description='Tags separated by either spaces or commas')
+    ):
     async with ctx.typing():
-        if any(tag in tag_input for tag in sus_tags):
-            await ctx.send("nu uh")
-            return
+        file_limit = 128
+
+        cleaned_input = tag_input 
+        user_tags = []
+
+        if tag_input:
+            tag_input_lower = tag_input.lower()
+            cleaned_input = re.sub(r"--(l|limit)=\d+", "", tag_input, flags=re.IGNORECASE).strip()
+
+            # match --l=20 or --limit=20
+            limit_match = re.search(r"--(l|limit)=([^\s]+)", tag_input_lower)
+            if limit_match:
+                limit_value = limit_match.group(2)
+                if limit_value.isdigit():
+                    file_limit = int(limit_value)
+                else:
+                    await ctx.send(f"`{limit_value}` isnt a number man ")
+
+            # check for other invalid flags
+            other_flags = re.findall(r"--([a-z0-9_-]+)", tag_input_lower)
+            for flag in other_flags:
+                if flag not in ["l", "limit"]:
+                    await ctx.send(f"tf is '--{flag}'?")
+
+            user_tags = [
+            tag.replace("_", " ").strip()
+            for tag in cleaned_input.replace(",", " ").split()
+            if tag.strip()
+            ]
+
+
+            if any(tag in user_tags for tag in sus_tags):
+                await ctx.send("nu uh")
+                return
+
+            if any(tag in user_tags for tag in wtf_tags):
+                await ctx.send(f"<@{settings.THE_SHAUS_ID}> give me ability to ban")
+                return
+
+        # tags for nsfw and sfw or sfw
+        tags_base = [
+            [
+                "system:has url with class pixiv file page",
+                "system:has url with class gelbooru file page",
+                "system:has url with class yande.re file page",
+                "system:has url with class zzz - renamed due to auto-import - x post"
+            ],
+            "-blue-eyes",
+            f"system:limit={file_limit}"
+        ]
+
+        tags_sfw = [
+            "rating:general",
+            [
+                "system:has url with class gelbooru file page",
+                "system:has url with class yande.re file page"
+            ],
+            "-loli",
+            f"system:limit={file_limit}"
+        ]
+
+        tags_to_use = tags_base if ctx.channel.is_nsfw() else tags_sfw
+
+        # parse user tags if any
+        if user_tags:
+             tags_to_use.extend(user_tags)
+
+        print(tags_to_use)
 
         API_KEY = settings.HYDRUS_API_KEY
         BASE_URL = settings.HYDRUS_API_URL 
@@ -40,85 +112,52 @@ async def hydrus(ctx, *, tag_input: str = ""):
 
         search_url = f"{BASE_URL}/get_files/search_files"
 
-
-        if ctx.message.channel.is_nsfw():
-            tags = [
-                ["system:has url with class pixiv file page", "system:has url with class gelbooru file page", "system:has url with class yande.re file page"],
-                "-loli"
-            ]
-        else:
-            tags = [
-                "rating:general",
-                ["system:has url with class gelbooru file page", "system:has url with class yande.re file page"],
-                "-loli"
-            ]
-
-
-
-        if tag_input:
-            # replace commas with spaces, split into words, replace underscores with spaces
-            user_tags = [
-                tag.replace("_", " ").strip()
-                for tag in tag_input.replace(",", " ").split()
-                if tag.strip()
-            ]
-            print(user_tags)
-            tags.extend(user_tags)
-        print(tags)
-
-        tags_enc = urllib.parse.quote(json.dumps(tags), safe='')
-
         query = {
-            "tags": tags_enc,
-            "return_file_ids": "true"
+            "tags": encode(tags_to_use),
+            "return_file_ids": "true",
+            "file_sort_type":6, #random
         }
-
-        filename = None
 
         try:
             response = requests.get(search_url, params=query, headers=HEADERS)
             response.raise_for_status()
             data = response.json()
+            #print(data)
             file_ids = data.get("file_ids", [])
-            print(len(file_ids))
+            print(file_ids)
 
             if not file_ids:
-                response = requests.get(search_url, params={"tags":user_tags,"return_file_ids": "true"}, headers=HEADERS)
+                if ctx.message.channel.is_nsfw():
+                    await ctx.send("cant find")
+                    return
+
+                query["tags"] = encode([["rating:explicit", "rating:sensitive", "rating:questionable"], "-loli"]) # set to allow only nsfw to see if any is there
+                response = requests.get(search_url, params=query, headers=HEADERS)
                 data = response.json()
+
                 if data.get("file_ids", []):
-                    await ctx.send("no horni")
+                    await ctx.send("no horni here")
                 else:
                     await ctx.send("cant find")
                 return
-
+            
             file_id = random.choice(file_ids)
 
-            # GET metadata properly
             metadata_url = f"{BASE_URL}/get_files/file_metadata"
             metadata_params = {
-                "file_ids": urllib.parse.quote(json.dumps([file_id]), safe='')
+                "file_ids": encode([file_id])
             }
             metadata_req = requests.get(metadata_url, params=metadata_params, headers=HEADERS)
             metadata_req.raise_for_status()
             metadata_json = metadata_req.json()["metadata"][0]
 
             urls = metadata_json.get("known_urls", [])
-            page_url = next((url for url in urls if "gelbooru" in url or "yande.re" in url), None)
+            page_url = next(
+                (url for url in urls if "gelbooru" in url or "yande.re" in url or "pixiv" in url or "x post" in url), 
+                None
+                )
 
-            if page_url:
-                await ctx.send(f"{page_url}")
-            else:
-                ext = metadata_json["ext"]
-                filename = f"temp_hydrus.{ext}"
-
-                file_url = f"{BASE_URL}/get_files/file"
-                file_res = requests.get(file_url, headers=HEADERS, params={"file_id": file_id})
-                file_res.raise_for_status()
-
-                with open(filename, "wb") as f:
-                    f.write(file_res.content)
-
-                await ctx.send(file=discord.File(filename))
+            await ctx.send(f"{page_url}")
 
         except Exception as e:
             await ctx.send(f"blueeh: {e}")
