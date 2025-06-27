@@ -37,29 +37,29 @@ async def hydrus(
     *, tag_input: str= commands.parameter(default='', description='Tags separated by either spaces or commas')
     ):
     async with ctx.typing():
-        file_limit = 128
+        file_limit = 5
 
         cleaned_input = tag_input 
         user_tags = []
 
         if tag_input:
-            tag_input_lower = tag_input.lower()
-            cleaned_input = re.sub(r"--(l|limit)=\d+", "", tag_input, flags=re.IGNORECASE).strip()
+            # tag_input_lower = tag_input.lower()
+            # cleaned_input = re.sub(r"--(l|limit)=\d+", "", tag_input, flags=re.IGNORECASE).strip()
 
-            # match --l=20 or --limit=20
-            limit_match = re.search(r"--(l|limit)=([^\s]+)", tag_input_lower)
-            if limit_match:
-                limit_value = limit_match.group(2)
-                if limit_value.isdigit():
-                    file_limit = int(limit_value)
-                else:
-                    await ctx.send(f"`{limit_value}` isnt a number man ")
+            # # match --l=20 or --limit=20
+            # limit_match = re.search(r"--(l|limit)=([^\s]+)", tag_input_lower)
+            # if limit_match:
+            #     limit_value = limit_match.group(2)
+            #     if limit_value.isdigit():
+            #         file_limit = int(limit_value)
+            #     else:
+            #         await ctx.send(f"`{limit_value}` isnt a number man ")
 
-            # check for other invalid flags
-            other_flags = re.findall(r"--([a-z0-9_-]+)", tag_input_lower)
-            for flag in other_flags:
-                if flag not in ["l", "limit"]:
-                    await ctx.send(f"tf is '--{flag}'?")
+            # # check for other invalid flags
+            # other_flags = re.findall(r"--([a-z0-9_-]+)", tag_input_lower)
+            # for flag in other_flags:
+            #     if flag not in ["l", "limit"]:
+            #         await ctx.send(f"tf is '--{flag}'?")
 
             user_tags = [
             tag.replace("_", " ").strip()
@@ -78,24 +78,24 @@ async def hydrus(
 
         # tags for nsfw and sfw or sfw
         tags_base = [
+            f"system:limit={file_limit}",
             [
                 "system:has url with class pixiv file page",
                 "system:has url with class gelbooru file page",
                 "system:has url with class yande.re file page",
                 "system:has url with class zzz - renamed due to auto-import - x post"
             ],
-            "-blue-eyes",
-            f"system:limit={file_limit}"
+            "-loli",
         ]
 
         tags_sfw = [
+            f"system:limit={file_limit}",
             "rating:general",
             [
                 "system:has url with class gelbooru file page",
                 "system:has url with class yande.re file page"
             ],
             "-loli",
-            f"system:limit={file_limit}"
         ]
 
         tags_to_use = tags_base if ctx.channel.is_nsfw() else tags_sfw
@@ -113,9 +113,9 @@ async def hydrus(
         search_url = f"{BASE_URL}/get_files/search_files"
 
         query = {
+            "file_sort_type":4, #random
             "tags": encode(tags_to_use),
-            "return_file_ids": "true",
-            "file_sort_type":6, #random
+            "return_file_ids": "true",   
         }
 
         try:
@@ -141,7 +141,8 @@ async def hydrus(
                     await ctx.send("cant find")
                 return
             
-            file_id = random.choice(file_ids)
+            #file_id = random.choice(file_ids)
+            file_id = file_ids[0]
 
             metadata_url = f"{BASE_URL}/get_files/file_metadata"
             metadata_params = {
