@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 import re
+import settings
 
 class RolePinger(commands.Cog):
     """ping shaus for games"""
@@ -21,7 +22,7 @@ class RolePinger(commands.Cog):
             ('<@&738831293609148416>' in message.content) or\
             ('<@&1224685430897643520>' in message.content) or\
             ('<@&1224885527598071919>' in message.content)) and not\
-            ((str(message.author.id) == '457432393146695690') and not ('<@&1224885527598071919>' in message.content)): #shaus and not @test
+            ((str(message.author.id) == f'{settings.THE_SHAUS_ID}') and not ('<@&1224885527598071919>' in message.content)): #shaus and not @test
 
             games = re.findall('<@&(.+?)>', message.content)
             msg = re.sub(r"<@&.*>", "", message.content)
@@ -33,7 +34,7 @@ class RolePinger(commands.Cog):
                 role = role + ' ' + str(discord.utils.get(message.guild.roles, id=int(game)))
                 #print('role is', role)  
 
-            await message.channel.send('<@457432393146695690> '+ role + msg)
+            await message.channel.send(f'<@{settings.THE_SHAUS_ID}> '+ role + msg)
 
 
 async def setup(bot):
