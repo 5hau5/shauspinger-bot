@@ -78,20 +78,4 @@ def edit_response(section: str, index: int, new_response=None, new_weight=None, 
         save_config(main)
 
 
-get_pinged_responses_1 = {
-    "no":10,
-    "i disagree":5,
-    "kys":1,
-}
-
-get_pinged_responses_2 = {
-    'https://tenor.com/view/blue-archive-amd-hoshino-takanashi-hoshino-dancing-gif-10581432706103341722':1,
-}
-
-
-not_a_number_responses = {
-    "thats not a number retard":10,
-    "thats definetly a number":2
-}
-
 

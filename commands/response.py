@@ -4,7 +4,7 @@ import response_config_handler as rch
 import difflib
 import settings
 
-@commands.command(name="addres", help="add a response: //addres [category] [response] [weight] [comment]")
+@commands.command(name="addres", help="add a response: //addres <category> <response> [weight] [comment]")
 async def addres(
     ctx, 
     category: str=commands.parameter(default=None, description='the category to add the response to'),
@@ -17,7 +17,7 @@ async def addres(
         return
     
     if not all([category, response]):
-        await ctx.send("used it wrong: `//addres [category] [response] [weight] [comment]`")
+        await ctx.send("used it wrong: `//addres <category> <response> [weight] [comment]`")
         return
     
     section = category.lower()
@@ -31,7 +31,7 @@ async def addres(
     rch.add_response(section, response, weight, comment)
     await ctx.send(f"added response to `{section}`: {response} (weight: {weight}, comment: {comment})")
 
-@commands.command(name="delres", help="delete response by index: //delres [category] [index]")
+@commands.command(name="delres", help="delete response by index: //delres <category> <index>")
 async def delres(
     ctx, 
     category: str=commands.parameter(default=None, description='the category to delete the response of'),
@@ -41,7 +41,7 @@ async def delres(
         return
     
     if category is None or index is None:
-        await ctx.send("nope, its like: `//delres [category] [index]`")
+        await ctx.send("nope, its like: `//delres <category> <index>`")
         return
      
     section = category.lower()
@@ -58,7 +58,7 @@ async def delres(
     except Exception as e:
         await ctx.send(f"error: {e}")
 
-@commands.command(name="editres", help="edit response: //editres [category] [index] [response] [weight] [comment]")
+@commands.command(name="editres", help="edit response: //editres <category> <index> [response] [weight] [comment]")
 async def editres(
     ctx,
     category: str = commands.parameter(default=None, description='the category to edit the response of'),
@@ -72,7 +72,7 @@ async def editres(
         return
 
     if category is None or index is None:
-        await ctx.send("usage: `//editres [category] [index] [response] [weight] [comment]`")
+        await ctx.send("usage: `//editres <category> <index> [response] [weight] [comment]`")
         return
 
     section = category.lower()
@@ -109,7 +109,7 @@ async def editres(
     except Exception as e:
         await ctx.send(f"error: {e}")
 
-@commands.command(name="addtrig", help="add a trigger: //addtrig [category] [trigger]")
+@commands.command(name="addtrig", help="add a trigger: //addtrig <category> <trigger>")
 async def addtrig(
     ctx, 
     category: str=commands.parameter(default=None, description='the category to add the trigger word of'), 
@@ -120,7 +120,7 @@ async def addtrig(
         return
     
     if not all([category, trigger]):
-        await ctx.send("its like: `//addtrig [category] [trigger]`")
+        await ctx.send("its like: `//addtrig <category> <trigger>`")
         return
      
     section = category.lower()
@@ -132,7 +132,7 @@ async def addtrig(
     await ctx.send(f"added trigger `{trigger}` to `{section}`.")
 
 
-@commands.command(name="deltrig", help="delete trigger: //deltrig [category] [trigger]")
+@commands.command(name="deltrig", help="delete trigger: //deltrig <category> <trigger>")
 async def deltrig(
     ctx, 
     category: str=commands.parameter(default=None, description='the category to delete the trigger word of'), 
@@ -143,7 +143,7 @@ async def deltrig(
         return
     
     if not all([category, trigger]):
-        await ctx.send("use it like: `//deltrig [category] [trigger]`")
+        await ctx.send("use it like: `//deltrig <category> <trigger>`")
         return
  
     section = category.lower()
@@ -159,7 +159,7 @@ async def deltrig(
         await ctx.send(f"trigger `{trigger}` not found in `{section}`.")
 
 
-@commands.command(name="edittrig", help="edit trigger: //edittrig [category] [old_trigger] [new_trigger]")
+@commands.command(name="edittrig", help="edit trigger: //edittrig <category> <old_trigger> <new_trigger>")
 async def edittrig(
     ctx, 
     category: str=commands.parameter(default=None, description='the category to list'), 
@@ -167,7 +167,7 @@ async def edittrig(
     new_trigger: str=commands.parameter(default=None, description='the word to change to')):
 
     if not all([category, old_trigger, new_trigger]) :
-        ctx.send("`//edittrig [category] [old_trigger] [new_trigger]`")
+        ctx.send("`//edittrig <category> <old_trigger> <new_trigger>`")
 
     if ctx.author.id != settings.THE_SHAUS_ID:
         await ctx.send("no")
@@ -196,13 +196,13 @@ async def edittrig(
     else:
         await ctx.send(f"`{old_trigger}` not found and no similar triggers in `{section}`.")
 
-@commands.command(name="lsres", help="list responses: //lsres [category]")
+@commands.command(name="lsres", help="list responses: //lsres <category>")
 async def lsres(
     ctx, 
     category: str=commands.parameter(default=None, description='The category to list')):
 
     if not category:
-        await ctx.send("u need a category to list out `//lsres [category]`")
+        await ctx.send("u need a category to list out `//lsres <category>`")
         return
 
     section = category.lower()
@@ -234,11 +234,11 @@ async def lsres(
 
     await ctx.send(embed=embed)
 
-@commands.command(name="lstrig", help="list triggers: //lstrig [category]")
+@commands.command(name="lstrig", help="list triggers: //lstrig <category>")
 async def lstrig(ctx, category: str):
 
     if not category:
-        await ctx.send("u need a category to list out `//lstrig [category]`")
+        await ctx.send("u need a category to list out `//lstrig <category>`")
         return
     
     section = category.lower()
