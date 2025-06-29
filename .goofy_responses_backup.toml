@@ -1,6 +1,7 @@
 [r6s]
 triggers = [
-    "seegx",
+    "seeg",
+    <@&738831293588045889>,
 ]
 responses = [
     "https://cdn.discordapp.com/attachments/746415517350363176/1362732917247184946/yan.gif?ex=6803776d&is=680225ed&hm=296e35890565c0ef3bad94dc4feb62ba082140011fa9e06a5cdc3317a5bc747a&",

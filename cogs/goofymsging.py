@@ -29,9 +29,9 @@ class GoofyMsgs(commands.Cog):
         
 
         #got pinged
-        # if ('<@1224676688521199616>' in message.content) and (settings.PREFIX not in message.content):
-        #     await message.channel.send(respond(get_pinged_responses_1))
-        #     await message.channel.send(respond(get_pinged_responses_2))
+        if (f'<@{self.bot.user.id}>' in message.content):
+            await message.channel.send(pick_response(section="got_pinged_text"))
+            await message.channel.send(pick_response(section="got_pinged_gif"))
 
 
 

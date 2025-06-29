@@ -17,7 +17,7 @@ async def addres(
         return
     
     if not all([category, response]):
-        ctx.send("used it wrong: `//edittrig [category] [old_trigger] [new_trigger]`")
+        await ctx.send("used it wrong: `//addres [category] [response] [weight] [comment]`")
         return
     
     section = category.lower()
@@ -40,8 +40,8 @@ async def delres(
         await ctx.send("no")
         return
     
-    if not all([category, index]):
-        ctx.send("nope, its like: `//delres [category] [index]`")
+    if category is None or index is None:
+        await ctx.send("nope, its like: `//delres [category] [index]`")
         return
      
     section = category.lower()
@@ -120,7 +120,7 @@ async def addtrig(
         return
     
     if not all([category, trigger]):
-        ctx.send("its like: `//addtrig [category] [trigger]`")
+        await ctx.send("its like: `//addtrig [category] [trigger]`")
         return
      
     section = category.lower()
@@ -143,7 +143,7 @@ async def deltrig(
         return
     
     if not all([category, trigger]):
-        ctx.send("use it like: `//deltrig [category] [trigger]`")
+        await ctx.send("use it like: `//deltrig [category] [trigger]`")
         return
  
     section = category.lower()
@@ -202,7 +202,7 @@ async def lsres(
     category: str=commands.parameter(default=None, description='The category to list')):
 
     if not category:
-        await ctx.sent("u need a category to list out `//lsres [category]`")
+        await ctx.send("u need a category to list out `//lsres [category]`")
         return
 
     section = category.lower()
@@ -238,7 +238,7 @@ async def lsres(
 async def lstrig(ctx, category: str):
 
     if not category:
-        await ctx.sent("u need a category to list out `//lsres [category]`")
+        await ctx.send("u need a category to list out `//lstrig [category]`")
         return
     
     section = category.lower()
