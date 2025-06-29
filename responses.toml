@@ -2,23 +2,18 @@
 triggers = [
     "seegx",
 ]
-
 responses = [
     "https://cdn.discordapp.com/attachments/746415517350363176/1362732917247184946/yan.gif?ex=6803776d&is=680225ed&hm=296e35890565c0ef3bad94dc4feb62ba082140011fa9e06a5cdc3317a5bc747a&",
     "https://cdn.discordapp.com/attachments/738831293864738975/1229465125514383421/reac.gif?ex=662fc7a0&is=661d52a0&hm=665f85732c43985759fc8acbdc3a7d3a073abd94350d56d3d8d9d693083cd9cc&",
 ]
-
 comments = [
     "yaniu shooting at maestro cam",
     "yaniu reaction time",
 ]
-
 weights = [
     10,
     10,
 ]
-
-
 
 [sex]
 triggers = [
@@ -26,43 +21,83 @@ triggers = [
     "segs",
     "seggs",
 ]
-
 responses = [
     "https://cdn.discordapp.com/attachments/738831293864738975/1229998157941833758/segs-arona.gif?ex=6631b80d&is=661f430d&hm=08dce8539c48abe0a9ccbefb101cd9309fff33148e35b546facda55cbf4fae2e&",
+    "https://media.discordapp.net/attachments/738548949488762954/888077474808877066/image0.gif?ex=6861fe59&is=6860acd9&hm=d1250a7438bbaa0f2d56e14b089bea997e87116148878667d88f626ab6e76e36&",
+    "https://tenor.com/view/freddy-freddy-fazbear-fazbear-fazbear-pizza-place-freddy-hitting-gif-5328662341160349848",
+    "https://cdn.discordapp.com/emojis/755791875008364586.gif?v=1",
+    "https://tenor.com/view/girls-band-cry-gif-9261521843907890427",
 ]
-
 comments = [
     "arona sex",
+    "youmu_sex",
+    "freaky_fredi",
+    "korone_sex",
+    "nina_subaru_sex",
 ]
-
 weights = [
+    10,
+    10,
+    10,
+    10,
     10,
 ]
 
-
-
 [goofy_aa_big_head]
 triggers = [
-    "big head"
+    "big head",
 ]
-
 responses = [
     "balls",
     "yaa",
     "eeee",
-    "wejbl;kjweqrbujolwe"
+    "wejbl;kjweqrbujolwe",
 ]
-
 comments = [
     "response 1",
     "response 2",
     "response 3",
-    "response 4"
+    "response 4",
 ]
-
 weights = [
     5,
     4,
     3,
-    2
+    2,
 ]
+
+[default_wrong_usage]
+triggers = [
+
+]
+responses = [
+    "kys",
+    "go fucking kill yourself",
+    "kill yourself",
+    "use it properly",
+    "nice one",
+    "daem",
+    "bruh",
+    "wtf man"
+]
+comments = [
+    "---",
+    "---",
+    "---",
+    "---",
+    "---",
+    "---",
+    "---",
+    "---",
+]
+weights = [
+    10,
+    8,
+    7,
+    50,
+    42,
+    32,
+    63,
+    54
+]
+
