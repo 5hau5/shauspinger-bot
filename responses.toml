@@ -1,7 +1,4 @@
 [default_wrong_usage]
-triggers = [
-
-]
 responses = [
     "kys",
     "go fucking kill yourself",
@@ -12,16 +9,7 @@ responses = [
     "bruh",
     "wtf man"
 ]
-comments = [
-    "---",
-    "---",
-    "---",
-    "---",
-    "---",
-    "---",
-    "---",
-    "---",
-]
+
 weights = [
     10,
     8,
@@ -33,3 +21,13 @@ weights = [
     54
 ]
 
+[not_a_number]
+responses=[
+    "thats not a number retard",
+    "thats definetly a number"
+]
+
+weights = [
+    10,
+    2
+]

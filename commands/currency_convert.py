@@ -256,12 +256,9 @@ async def convert_currency(
 @convert_currency.error
 async def convert_currency_error(ctx, error):
     if isinstance(error, commands.BadArgument):
-        await ctx.send(pick_response(not_a_number_responses))
-        pass
+        await ctx.send(pick_response(section="not_a_number", main=True))
 
         
-
-
 async def setup(bot):
     bot.add_command(convert_currency)
     
