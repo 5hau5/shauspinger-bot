@@ -4,6 +4,10 @@ import response_config_handler as rch
 import difflib
 import settings
 
+config = rch.get_config(main=False)
+# temporary setup for now 
+# change all functions to be able to swap between the 2 configs
+
 @commands.command(name="addres", help="add a response: //addres <category> <response> [weight] [comment]")
 async def addres(
     ctx, 
@@ -21,7 +25,7 @@ async def addres(
         return
     
     section = category.lower()
-    if section not in rch.config:
+    if section not in config:
         await ctx.send(f"category `{section}` does not exist.")
         return
     
@@ -45,14 +49,14 @@ async def delres(
         return
      
     section = category.lower()
-    if section not in rch.config:
+    if section not in config:
         await ctx.send(f"category `{section}` does not exist.")
         return
 
     try:
-        del rch.config[section]["responses"][index]
-        del rch.config[section]["weights"][index]
-        del rch.config[section]["comments"][index]
+        del config[section]["responses"][index]
+        del config[section]["weights"][index]
+        del config[section]["comments"][index]
         rch.save_config()
         await ctx.send(f"deleted response at index {index} in `{section}`.")
     except Exception as e:
@@ -76,14 +80,14 @@ async def editres(
         return
 
     section = category.lower()
-    if section not in rch.config:
+    if section not in config:
         await ctx.send(f"category `{section}` does not exist.")
         return
 
     try:
-        responses = rch.config[section]["responses"]
-        weights = rch.config[section]["weights"]
-        comments = rch.config[section]["comments"]
+        responses = config[section]["responses"]
+        weights = config[section]["weights"]
+        comments = config[section]["comments"]
 
         if not (0 <= index < len(responses)):
             await ctx.send(f"invalid index `{index}` for `{section}`.")
@@ -124,7 +128,7 @@ async def addtrig(
         return
      
     section = category.lower()
-    if section not in rch.config:
+    if section not in config:
         await ctx.send(f"category `{section}` does not exist.")
         return
 
@@ -147,12 +151,12 @@ async def deltrig(
         return
  
     section = category.lower()
-    if section not in rch.config:
+    if section not in config:
         await ctx.send(f"category `{section}` does not exist.")
         return
 
     try:
-        rch.config[section]["triggers"].remove(trigger)
+        config[section]["triggers"].remove(trigger)
         rch.save_config()
         await ctx.send(f"trigger `{trigger}` deleted from `{section}`.")
     except ValueError:
@@ -174,11 +178,11 @@ async def edittrig(
         return
  
     section = category.lower()
-    if section not in rch.config:
+    if section not in config:
         await ctx.send(f"category `{section}` does not exist.")
         return
 
-    triggers = rch.config[section].get("triggers", [])
+    triggers = config[section].get("triggers", [])
     if old_trigger in triggers:
         if new_trigger in triggers:
             await ctx.send(f"trigger `{new_trigger}` already exists.")
@@ -206,11 +210,11 @@ async def lsres(
         return
 
     section = category.lower()
-    if section not in rch.config:
+    if section not in config:
         await ctx.send(f"category `{section}` does not exist.")
         return
 
-    data = rch.config[section]
+    data = config[section]
     responses = data.get("responses", [])
     weights = data.get("weights", [])
     comments = data.get("comments", [])
@@ -242,11 +246,11 @@ async def lstrig(ctx, category: str):
         return
     
     section = category.lower()
-    if section not in rch.config:
+    if section not in config:
         await ctx.send(f"category `{section}` does not exist.")
         return
 
-    triggers = rch.config[section].get("triggers", [])
+    triggers = config[section].get("triggers", [])
     if not triggers:
         await ctx.send(f"no triggers found in `{section}`.")
         return

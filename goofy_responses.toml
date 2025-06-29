@@ -20,6 +20,9 @@ triggers = [
     "sex",
     "segs",
     "seggs",
+    "freak",
+    "freaky",
+    "freaki",
 ]
 responses = [
     "https://cdn.discordapp.com/attachments/738831293864738975/1229998157941833758/segs-arona.gif?ex=6631b80d&is=661f430d&hm=08dce8539c48abe0a9ccbefb101cd9309fff33148e35b546facda55cbf4fae2e&",
@@ -27,6 +30,11 @@ responses = [
     "https://tenor.com/view/freddy-freddy-fazbear-fazbear-fazbear-pizza-place-freddy-hitting-gif-5328662341160349848",
     "https://cdn.discordapp.com/emojis/755791875008364586.gif?v=1",
     "https://tenor.com/view/girls-band-cry-gif-9261521843907890427",
+    "https://cdn.discordapp.com/attachments/738831293864738975/1381883442957914203/RDT_20250608_1907062145042502345051570.gif?ex=68622f3e&is=6860ddbe&hm=5502822015bd229e9b600baed397a87d445c68f3588c79f3ce7a7c3289a784f3&",
+    "https://tenor.com/view/touhou-orin-okuu-utsuho-utsuho-reiuji-gif-3335087173985524435",
+    "https://tenor.com/view/fumo-fumo-sex-touhou-touhou-project-alimari-gif-4147126675707309296",
+    "https://cdn.discordapp.com/attachments/1203774243062550610/1222485081600294933/image0.gif?ex=68625ff4&is=68610e74&hm=6a8633f33d294ee1280fce45deef455d6e80eae2474b9aef725d670dc7ad9336&",
+    "https://tenor.com/view/tetris-tetris-sex-gif-25857618",
 ]
 comments = [
     "arona sex",
@@ -34,8 +42,18 @@ comments = [
     "freaky_fredi",
     "korone_sex",
     "nina_subaru_sex",
+    "doro_sex",
+    "orin_utsuho_sex",
+    "marialice_sex",
+    "shiroko_lick_aggressive",
+    "tetris_sex",
 ]
 weights = [
+    10,
+    10,
+    10,
+    10,
+    10,
     10,
     10,
     10,
@@ -67,18 +85,16 @@ weights = [
 ]
 
 [got_pinged_text]
-triggers = [
-
-]
+triggers = []
 responses = [
     "no",
     "i disagree",
-    "kys"
+    "kys",
 ]
 comments = [
     "---",
     "---",
-    "---"
+    "---",
 ]
 weights = [
     10,
@@ -87,27 +103,22 @@ weights = [
 ]
 
 [got_pinged_gif]
-triggers = [
-
-]
+triggers = []
 responses = [
     "https://tenor.com/view/blue-archive-amd-hoshino-takanashi-hoshino-dancing-gif-10581432706103341722",
     "https://tenor.com/view/dance-dancing-ba-blue-archive-hoshino-gif-7432820339922762118",
     "https://tenor.com/view/takanashi-hoshino-blue-archive-hoshino-dance-hoshino-hoshino-blue-archive-gif-8449320256698247153",
-    "https://tenor.com/view/takanashi-hoshino-blue-archive-cunny-archive-hoshino-my-beloved-hoshinohoshinohoshino-gif-24835592"
+    "https://tenor.com/view/takanashi-hoshino-blue-archive-cunny-archive-hoshino-my-beloved-hoshinohoshinohoshino-gif-24835592",
 ]
 comments = [
     "hoshino_dancing_1",
     "hoshino_dancing_2",
     "hoshino_dancing_wiggle",
-    "hoshino_vibrate"
+    "hoshino_vibrate",
 ]
 weights = [
     4,
     4,
     2,
-    1
+    1,
 ]
-
-
-
