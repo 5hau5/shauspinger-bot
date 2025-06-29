@@ -20,7 +20,8 @@ class GoofyMsgs(commands.Cog):
         msg_content = message.content.lower()
 
         response = pick_response(msg_content)
-        await message.channel.send(response)
+        if response:
+            await message.channel.send(response)
 
         #r6s
         # if ('<@&738831293588045889>' in message.content):

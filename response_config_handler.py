@@ -1,8 +1,6 @@
 import random
-import configparser
 import tomli as tomllib
 import tomli_w
-import ast
 import settings
 
 CONFIG_PATH = settings.RESPONSE_CONFIG
@@ -11,21 +9,33 @@ with open(CONFIG_PATH, "rb") as f:
     config = tomllib.load(f)
 
 def save_config():
-    with open(CONFIG_PATH, "w", encoding="utf-8") as f:
+    with open(CONFIG_PATH, "wb") as f:
         tomli_w.dump(config, f)
 
 
-def pick_response(message_content: str):
-    message_lower = message_content.lower()
+def pick_response(message_content: str = None, section: str = None):
+    # If a section is given directly
+    if section:
+        data = config.get(section, {})
+        responses = data.get("responses", [])
+        weights = data.get("weights", [])
+        if responses and weights:
+            return random.choices(responses, weights=weights, k=1)[0]
+        return None
 
-    for section, data in config.items():
-        triggers = data.get("triggers", [])
-        if any(trigger in message_lower for trigger in triggers):
-            responses = data.get("responses", [])
-            weights = data.get("weights", [])
-            if responses and weights:
-                return random.choices(responses, weights=weights, k=1)[0]
+    # Otherwise, use trigger matching
+    if message_content:
+        message_lower = message_content.lower()
+        for sec, data in config.items():
+            triggers = data.get("triggers", [])
+            if any(trigger in message_lower for trigger in triggers):
+                responses = data.get("responses", [])
+                weights = data.get("weights", [])
+                if responses and weights:
+                    return random.choices(responses, weights=weights, k=1)[0]
+
     return None
+
 
 def add_trigger(section, new_trigger):
     if new_trigger not in config[section]["triggers"]:

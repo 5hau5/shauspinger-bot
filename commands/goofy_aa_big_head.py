@@ -20,7 +20,7 @@ async def goofy_aa_big_head(ctx):
 
     random_image_file = random.choice(image_files)
     image_path = os.path.join(image_dir, random_image_file)
-    await ctx.send(pick_response(goofy_aa_big_head_responses))
+    await ctx.send(pick_response(section="goofy_aa_big_head"))
     await ctx.send(file=discord.File(image_path))
 
 async def setup(bot):
