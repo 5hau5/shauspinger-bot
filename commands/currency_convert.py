@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 from discord.ext import commands
 import json
 from discord import app_commands
-from responses import *
+from response_config_handler import *
 
 logger = logging.getLogger(__name__)
 
@@ -256,7 +256,8 @@ async def convert_currency(
 @convert_currency.error
 async def convert_currency_error(ctx, error):
     if isinstance(error, commands.BadArgument):
-        await ctx.send(respond(not_a_number_responses))
+        await ctx.send(pick_response(not_a_number_responses))
+        pass
 
         
 

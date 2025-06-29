@@ -3,7 +3,7 @@ import discord
 import random   
 import settings
 import os
-from responses import *
+from response_config_handler import *
 
 image_dir = os.path.join(settings.RESOURCE_DIR, 'goofy_aa_big_head_images')
 image_files = [f for f in os.listdir(image_dir) if f.lower().endswith(('.png', '.jpg', '.jpeg', '.gif'))]
@@ -16,11 +16,11 @@ image_files = [f for f in os.listdir(image_dir) if f.lower().endswith(('.png', '
 )
 async def goofy_aa_big_head(ctx):
     if not image_files:
-        raise Exception(f"No images found in {image_dir}")
+        raise Exception(f"no images found in {image_dir}")
 
     random_image_file = random.choice(image_files)
     image_path = os.path.join(image_dir, random_image_file)
-    await ctx.send(respond(goofy_aa_big_head_responses))
+    await ctx.send(pick_response(goofy_aa_big_head_responses))
     await ctx.send(file=discord.File(image_path))
 
 async def setup(bot):

@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from responses import *
+from response_config_handler import *
 import settings
 
 class GoofyMsgs(commands.Cog):
@@ -12,24 +12,25 @@ class GoofyMsgs(commands.Cog):
     async def on_message(self, message: discord.Message):
         if message.author == self.bot.user:
             return
-        #r6s
-        if ('<@&738831293588045889>' in message.content):
-            await message.channel.send(respond(r6_ping_responses))
         
-        #sex
-        if ('sex' in message.content.lower()) or\
-            ('segs' in message.content.lower()) or\
-            ('seggs' in message.content.lower()):
-            await message.channel.send('https://cdn.discordapp.com/attachments/738831293864738975/1229998157941833758/segs-arona.gif?ex=6631b80d&is=661f430d&hm=08dce8539c48abe0a9ccbefb101cd9309fff33148e35b546facda55cbf4fae2e&')
+        ctx = await self.bot.get_context(message)
+        if ctx.valid:
+            return
         
+        msg_content = message.content.lower()
+
+        response = pick_response(msg_content)
+        await message.channel.send(response)
+
         #r6s
-        if ('seeg' in message.content.lower()):
-            pass
+        # if ('<@&738831293588045889>' in message.content):
+        #     await message.channel.send(respond(r6_ping_responses))
+        
 
         #got pinged
-        if ('<@1224676688521199616>' in message.content) and (settings.PREFIX not in message.content):
-            await message.channel.send(respond(get_pinged_responses_1))
-            await message.channel.send(respond(get_pinged_responses_2))
+        # if ('<@1224676688521199616>' in message.content) and (settings.PREFIX not in message.content):
+        #     await message.channel.send(respond(get_pinged_responses_1))
+        #     await message.channel.send(respond(get_pinged_responses_2))
 
 
 

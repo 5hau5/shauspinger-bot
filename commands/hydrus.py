@@ -6,7 +6,7 @@ import os
 import random
 import json
 import urllib.parse
-import responses
+#import response_config_handler
 import re
 
 sus_tags = [

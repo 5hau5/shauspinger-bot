@@ -5,6 +5,7 @@ import logging
 import pathlib
 import discord
 
+
 load_dotenv()
 DISCORD_API_SECRET = os.getenv("DISCORD_API_TOKEN")
 
@@ -15,6 +16,7 @@ BASE_DIR = pathlib.Path(__file__).parent
 CMDS_DIR = BASE_DIR / "commands"
 COGS_DIR = BASE_DIR / "cogs"
 RESOURCE_DIR = BASE_DIR / "resources"
+RESPONSE_CONFIG = "responses.toml"
 
 GUILDS_ID = discord.Object(id=int(os.getenv("GUILD")))
 MAIN_CHANNEL_ID = int(os.getenv("MAIN_CHANNEL"))
@@ -66,5 +68,11 @@ LOGGING_CONFIG = {
         }
     }
 }
+
+ROLE_IDS = {
+    "Rainbow Six Siege" : 738831293588045889,
+    "Battlefield 1" : 1221754627419017247,
+}
+
 
 dictConfig(LOGGING_CONFIG)
