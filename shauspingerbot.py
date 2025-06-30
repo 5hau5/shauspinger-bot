@@ -33,29 +33,29 @@ def shauspinger():
                 await bot.close()  
                 return
 
-            #bot.text_input_task = asyncio.create_task(start_text_input_loop())
+            bot.text_input_task = asyncio.create_task(start_text_input_loop())
 
             print("rediii")
 
         except Exception as e:
             print(e)
 
-    # async def start_text_input_loop():
-    #     while not bot.is_closed():
-    #         message = await asyncio.to_thread(input, "enter mesag: ")
-    #         channel = bot.get_channel(settings.MAIN_CHANNEL_ID)
-    #         if channel:
-    #             await channel.send(message)
-    #         else:
-    #             print("Main channel not found!")
+    async def start_text_input_loop():
+        while not bot.is_closed():
+            message = await asyncio.to_thread(input, "enter mesag: ")
+            channel = bot.get_channel(settings.MAIN_CHANNEL_ID)
+            if channel:
+                await channel.send(message)
+            else:
+                print("Main channel not found!")
 
     async def close_bot():
-        #if bot.text_input_task and not bot.text_input_task.done():
-            #bot.text_input_task.cancel()  
-            #try:
-                #await bot.text_input_task
-            #except asyncio.CancelledError:
-                #pass  
+        if bot.text_input_task and not bot.text_input_task.done():
+            bot.text_input_task.cancel()  
+            try:
+                await bot.text_input_task
+            except asyncio.CancelledError:
+                pass  
 
         await bot.close()
 
