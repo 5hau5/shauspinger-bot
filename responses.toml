@@ -31,3 +31,22 @@ weights = [
     10,
     2
 ]
+
+[peasant]
+responses=[
+    "nu uh",
+    "nope",
+    "u cant do dat",
+    "peasant",
+    "go kys",
+    "no",
+]
+
+weights = [
+    10,
+    10,
+    10,
+    10,
+    3,
+    10,
+]

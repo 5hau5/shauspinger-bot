@@ -23,6 +23,9 @@ triggers = [
     "freak",
     "freaky",
     "freaki",
+    "freek",
+    "freeki",
+    "sexo",
 ]
 responses = [
     "https://cdn.discordapp.com/attachments/738831293864738975/1229998157941833758/segs-arona.gif?ex=6631b80d&is=661f430d&hm=08dce8539c48abe0a9ccbefb101cd9309fff33148e35b546facda55cbf4fae2e&",
@@ -35,6 +38,8 @@ responses = [
     "https://tenor.com/view/fumo-fumo-sex-touhou-touhou-project-alimari-gif-4147126675707309296",
     "https://cdn.discordapp.com/attachments/1203774243062550610/1222485081600294933/image0.gif?ex=68625ff4&is=68610e74&hm=6a8633f33d294ee1280fce45deef455d6e80eae2474b9aef725d670dc7ad9336&",
     "https://tenor.com/view/tetris-tetris-sex-gif-25857618",
+    "https://cdn.discordapp.com/attachments/677548756262060044/1383556936775110769/1749936067580.gif",
+    "https://tenor.com/view/mococo-fuwamoco-vtuber-hololive-mococo-lick-gif-16937631731854129467",
 ]
 comments = [
     "arona sex",
@@ -47,8 +52,12 @@ comments = [
     "marialice_sex",
     "shiroko_lick_aggressive",
     "tetris_sex",
+    "tight_kagami",
+    "mogojohn_freaky_style",
 ]
 weights = [
+    10,
+    10,
     10,
     10,
     10,
