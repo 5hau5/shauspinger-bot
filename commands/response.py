@@ -8,7 +8,7 @@ config = rch.get_config(main=False)
 # temporary setup for now 
 # change all functions to be able to swap between the 2 configs
 
-@commands.command(name="addres", help="add a response: //addres <category> <response> [weight] [comment]")
+@commands.command(name="addres", help="add a response: //addres <category> <response> [weight] [comment]", hidden=True)
 async def addres(
     ctx, 
     category: str=commands.parameter(default=None, description='the category to add the response to'),
@@ -35,7 +35,7 @@ async def addres(
     rch.add_response(section, response, weight, comment)
     await ctx.send(f"added response to `{section}`: {response} (weight: {weight}, comment: {comment})")
 
-@commands.command(name="delres", help="delete response by index: //delres <category> <index>")
+@commands.command(name="delres", help="delete response by index: //delres <category> <index>", hidden=True)
 async def delres(
     ctx, 
     category: str=commands.parameter(default=None, description='the category to delete the response of'),
@@ -62,7 +62,7 @@ async def delres(
     except Exception as e:
         await ctx.send(f"error: {e}")
 
-@commands.command(name="editres", help="edit response: //editres <category> <index> [response] [weight] [comment]")
+@commands.command(name="editres", help="edit response: //editres <category> <index> [response] [weight] [comment]", hidden=True)
 async def editres(
     ctx,
     category: str = commands.parameter(default=None, description='the category to edit the response of'),
@@ -136,7 +136,7 @@ async def addtrig(
     await ctx.send(f"added trigger `{trigger}` to `{section}`.")
 
 
-@commands.command(name="deltrig", help="delete trigger: //deltrig <category> <trigger>")
+@commands.command(name="deltrig", help="delete trigger: //deltrig <category> <trigger>", hidden=True)
 async def deltrig(
     ctx, 
     category: str=commands.parameter(default=None, description='the category to delete the trigger word of'), 
@@ -163,7 +163,7 @@ async def deltrig(
         await ctx.send(f"trigger `{trigger}` not found in `{section}`.")
 
 
-@commands.command(name="edittrig", help="edit trigger: //edittrig <category> <old_trigger> <new_trigger>")
+@commands.command(name="edittrig", help="edit trigger: //edittrig <category> <old_trigger> <new_trigger>", hidden=True)
 async def edittrig(
     ctx, 
     category: str=commands.parameter(default=None, description='the category to list'), 
@@ -270,7 +270,8 @@ async def setup(bot):
     bot.add_command(delres)
     bot.add_command(deltrig)
     bot.add_command(editres)
+    bot.add_command(edittrig)
     bot.add_command(lsres)
     bot.add_command(lstrig)
-    bot.add_command(edittrig)
+    
 
