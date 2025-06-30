@@ -113,7 +113,7 @@ async def editres(
     except Exception as e:
         await ctx.send(f"error: {e}")
 
-@commands.command(name="addtrig", help="add a trigger: //addtrig <category> <trigger>")
+@commands.command(name="addtrig", help="add a trigger: //addtrig <category> <trigger>", hidden=True)
 async def addtrig(
     ctx, 
     category: str=commands.parameter(default=None, description='the category to add the trigger word of'), 
