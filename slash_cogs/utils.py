@@ -199,14 +199,13 @@ class Utility(commands.Cog):
             print(e)
         return result
 
-    # Autocomplete callback
     async def currency_autocomplete(self, interaction: Interaction, current: str):
         current = current.upper()
         return [
             app_commands.Choice(name=f"{name} ({code})", value=code)
             for code, name in CODES.items()
             if current in code or current in name.upper()
-        ][:25]  # max 25 suggestions
+        ][:10]  # max 10 suggestions
 
     @app_commands.command(name="convert", description="convert currency using live exchange rate")
     @app_commands.describe(
@@ -240,7 +239,7 @@ class Utility(commands.Cog):
         else:
             await interaction.response.send_message("idk", ephemeral=True)
 
-    # Register autocomplete on convert_slash command
+    # register autocomplete on convert_slash command
     @convert_slash.autocomplete("currency_from")
     async def from_autocomplete(self, interaction: Interaction, current: str):
         return await self.currency_autocomplete(interaction, current)
