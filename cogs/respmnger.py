@@ -9,7 +9,10 @@ class ResponseManager(commands.Cog):
         self.bot = bot
         self.config = rch.get_config(main=False)
 
-    @commands.command(name="addres", help="add a response: //addres <category> <response> [weight] [comment]", hidden=True)
+    @commands.command(
+            name="addres", 
+            help="add a response: //addres <category> <response> [weight] [comment]", 
+            hidden=True)
     async def addres(
         self,
         ctx, 
@@ -36,7 +39,10 @@ class ResponseManager(commands.Cog):
         rch.add_response(section, response, weight, comment)
         await ctx.send(f"added response to `{section}`: {response} (weight: {weight}, comment: {comment})")
 
-    @commands.command(name="delres", help="delete response by index: //delres <category> <index>", hidden=True)
+    @commands.command(
+            name="delres", 
+            help="delete response by index: //delres <category> <index>", 
+            hidden=True)
     async def delres(
         self,
         ctx, 
@@ -64,7 +70,10 @@ class ResponseManager(commands.Cog):
         except Exception as e:
             await ctx.send(f"error: {e}")
 
-    @commands.command(name="editres", help="edit response: //editres <category> <index> [response] [weight] [comment]", hidden=True)
+    @commands.command(
+            name="editres", 
+            help="edit response: //editres <category> <index> [response] [weight] [comment]", 
+            hidden=True)
     async def editres(
         self,
         ctx,
@@ -116,7 +125,10 @@ class ResponseManager(commands.Cog):
         except Exception as e:
             await ctx.send(f"error: {e}")
 
-    @commands.command(name="addtrig", help="add a trigger: //addtrig <category> <trigger>", hidden=True)
+    @commands.command(
+            name="addtrig", 
+            help="add a trigger: //addtrig <category> <trigger>", 
+            hidden=True)
     async def addtrig(
         self,
         ctx, 
@@ -129,8 +141,7 @@ class ResponseManager(commands.Cog):
         
         if not all([category, trigger]):
             return await ctx.send("its like: `//addtrig <category> <trigger>`")
-            
-        
+             
         section = category.lower()
         if section not in self.config:
             return await ctx.send(f"category `{section}` does not exist.")
@@ -142,23 +153,21 @@ class ResponseManager(commands.Cog):
 
     @commands.command(name="deltrig", help="delete trigger: //deltrig <category> <trigger>", hidden=True)
     async def deltrig(
+        self,
         ctx, 
         category: str=commands.parameter(default=None, description='the category to delete the trigger word of'), 
         trigger: str=commands.parameter(default=None, description='the word to delete')):
 
         if ctx.author.id != settings.THE_SHAUS_ID:
-            await ctx.send("no")
-            return
-        
+            return await ctx.send("no")
+            
         if not all([category, trigger]):
-            await ctx.send("use it like: `//deltrig <category> <trigger>`")
-            return
-    
+            return await ctx.send("use it like: `//deltrig <category> <trigger>`")
+            
         section = category.lower()
         if section not in self.config:
-            await ctx.send(f"category `{section}` does not exist.")
-            return
-
+            return await ctx.send(f"category `{section}` does not exist.")
+            
         try:
             self.config[section]["triggers"].remove(trigger)
             rch.save_config()
@@ -167,8 +176,12 @@ class ResponseManager(commands.Cog):
             await ctx.send(f"trigger `{trigger}` not found in `{section}`.")
 
 
-    @commands.command(name="edittrig", help="edit trigger: //edittrig <category> <old_trigger> <new_trigger>", hidden=True)
+    @commands.command(
+            name="edittrig", 
+            help="edit trigger: //edittrig <category> <old_trigger> <new_trigger>", 
+            hidden=True)
     async def edittrig(
+        self,
         ctx, 
         category: str=commands.parameter(default=None, description='the category to list'), 
         old_trigger: str=commands.parameter(default=None, description='the trigger word to change'), 
@@ -178,25 +191,22 @@ class ResponseManager(commands.Cog):
             ctx.send("`//edittrig <category> <old_trigger> <new_trigger>`")
 
         if ctx.author.id != settings.THE_SHAUS_ID:
-            await ctx.send("no")
-            return
-    
+            return await ctx.send("no")
+            
         section = category.lower()
         if section not in self.config:
-            await ctx.send(f"category `{section}` does not exist.")
-            return
-
+            return await ctx.send(f"category `{section}` does not exist.")
+            
         triggers = self.config[section].get("triggers", [])
         if old_trigger in triggers:
             if new_trigger in triggers:
-                await ctx.send(f"trigger `{new_trigger}` already exists.")
-                return
+                return await ctx.send(f"trigger `{new_trigger}` already exists.")
+                
             idx = triggers.index(old_trigger)
             triggers[idx] = new_trigger
             rch.save_config()
-            await ctx.send(f"replaced `{old_trigger}` with `{new_trigger}` in `{section}`.")
-            return
-
+            return await ctx.send(f"replaced `{old_trigger}` with `{new_trigger}` in `{section}`.")
+            
         # fuzzy match
         closest = difflib.get_close_matches(old_trigger, triggers, n=1, cutoff=0.6)
         if closest:
@@ -204,29 +214,29 @@ class ResponseManager(commands.Cog):
         else:
             await ctx.send(f"`{old_trigger}` not found and no similar triggers in `{section}`.")
 
-    @commands.command(name="lsres", help="list responses: //lsres <category>")
+    @commands.command(
+            name="lsres", 
+            help="list responses: //lsres <category>")
     async def lsres(
+        self,
         ctx, 
         category: str=commands.parameter(default=None, description='The category to list')):
 
         if not category:
-            await ctx.send("u need a category to list out `//lsres <category>`")
-            return
-
+            return await ctx.send("u need a category to list out `//lsres <category>`")
+            
         section = category.lower()
         if section not in self.config:
-            await ctx.send(f"category `{section}` does not exist.")
-            return
-
+            return await ctx.send(f"category `{section}` does not exist.")
+            
         data = self.config[section]
         responses = data.get("responses", [])
         weights = data.get("weights", [])
         comments = data.get("comments", [])
 
         if not responses:
-            await ctx.send(f"no responses found in `{section}`.")
-            return
-
+            return await ctx.send(f"no responses found in `{section}`.")
+            
         embed = discord.Embed(
             title=f"responses in `{section}`",
             color=discord.Color.blurple()
@@ -242,22 +252,21 @@ class ResponseManager(commands.Cog):
 
         await ctx.send(embed=embed)
 
-    @commands.command(name="lstrig", help="list triggers: //lstrig <category>")
-    async def lstrig(ctx, category: str):
+    @commands.command(
+            name="lstrig", 
+            help="list triggers: //lstrig <category>")
+    async def lstrig(self, ctx, category: str=commands.parameter(default=None, description='The category to list')):
 
         if not category:
-            await ctx.send("u need a category to list out `//lstrig <category>`")
-            return
-        
+            return await ctx.send("u need a category to list out `//lstrig <category>`")
+            
         section = category.lower()
         if section not in self.config:
-            await ctx.send(f"category `{section}` does not exist.")
-            return
+            return await ctx.send(f"category `{section}` does not exist.") 
 
         triggers = self.config[section].get("triggers", [])
         if not triggers:
-            await ctx.send(f"no triggers found in `{section}`.")
-            return
+            return await ctx.send(f"no triggers found in `{section}`.")           
 
         embed = discord.Embed(
             title=f"triggers in `{section}`",
@@ -266,3 +275,7 @@ class ResponseManager(commands.Cog):
         )
 
         await ctx.send(embed=embed)
+
+
+async def setup(bot):
+    await bot.add_cog(ResponseManager(bot))
