@@ -17,13 +17,26 @@ def shauspinger():
     async def on_ready():
         try:
             logger.info(f"User: {bot.user}(ID: {bot.user.id}) Guild ID: {bot.guilds[0].id}")
+            print("loading command extensions...")
+
+            # prefix cmds
             for cmd_file in settings.CMDS_DIR.glob("*.py"):
                 if cmd_file.name != "__init__.py":
                     await bot.load_extension(f"commands.{cmd_file.name[:-3]}")
 
+            # cogs
             for cog_file in settings.COGS_DIR.glob("*.py"):
                 if cog_file.name != "__init__.py":
                     await bot.load_extension(f"cogs.{cog_file.name[:-3]}")
+            
+            # slash cogs
+            for slsh_cog_file in settings.SLSH_COGS_DIR.glob("*.py"):
+                if slsh_cog_file.name != "__init__.py":
+                    await bot.load_extension(f"cogs.{slsh_cog_file.name[:-3]}")
+
+            await bot.tree.sync(guild=discord.Object(id=settings.GUILDS_ID))
+            print("slash commands synced to yuyumelon")
+            # await bot.tree.sync()
 
             main_channel = bot.get_channel(settings.MAIN_CHANNEL_ID)
             if main_channel:

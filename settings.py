@@ -15,6 +15,7 @@ VERSION = os.getenv("VERSION")
 BASE_DIR = pathlib.Path(__file__).parent
 CMDS_DIR = BASE_DIR / "commands"
 COGS_DIR = BASE_DIR / "cogs"
+SLSH_COGS_DIR = BASE_DIR / "slash_cogs"
 RESOURCE_DIR = BASE_DIR / "resources"
 GOOFY_RESPONSE_CONFIG = "goofy_responses.toml"
 RESPONSE_CONFIG = "responses.toml"
