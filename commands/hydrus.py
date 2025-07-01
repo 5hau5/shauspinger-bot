@@ -1,12 +1,9 @@
 from discord.ext import commands
-import discord
 import requests
 import settings
-import os
 import random
 import json
 import urllib.parse
-import re
 
 sus_tags = [
     "furry",
@@ -42,23 +39,6 @@ async def hydrus(
         user_tags = []
 
         if tag_input:
-            # tag_input_lower = tag_input.lower()
-            # cleaned_input = re.sub(r"--(l|limit)=\d+", "", tag_input, flags=re.IGNORECASE).strip()
-
-            # # match --l=20 or --limit=20
-            # limit_match = re.search(r"--(l|limit)=([^\s]+)", tag_input_lower)
-            # if limit_match:
-            #     limit_value = limit_match.group(2)
-            #     if limit_value.isdigit():
-            #         file_limit = int(limit_value)
-            #     else:
-            #         await ctx.send(f"`{limit_value}` isnt a number man ")
-
-            # # check for other invalid flags
-            # other_flags = re.findall(r"--([a-z0-9_-]+)", tag_input_lower)
-            # for flag in other_flags:
-            #     if flag not in ["l", "limit"]:
-            #         await ctx.send(f"tf is '--{flag}'?")
 
             user_tags = [
             tag.replace("_", " ").strip()
