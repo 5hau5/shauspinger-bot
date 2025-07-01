@@ -32,9 +32,9 @@ def shauspinger():
             # slash cogs
             for slsh_cog_file in settings.SLSH_COGS_DIR.glob("*.py"):
                 if slsh_cog_file.name != "__init__.py":
-                    await bot.load_extension(f"cogs.{slsh_cog_file.name[:-3]}")
+                    await bot.load_extension(f"slash_cogs.{slsh_cog_file.name[:-3]}")
 
-            await bot.tree.sync(guild=discord.Object(id=settings.GUILDS_ID))
+            await bot.tree.sync(guild=settings.GUILD)
             print("slash commands synced to yuyumelon")
             # await bot.tree.sync()
 

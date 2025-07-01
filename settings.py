@@ -20,7 +20,7 @@ RESOURCE_DIR = BASE_DIR / "resources"
 GOOFY_RESPONSE_CONFIG = "goofy_responses.toml"
 RESPONSE_CONFIG = "responses.toml"
 
-GUILDS_ID = discord.Object(id=int(os.getenv("GUILD")))
+GUILD = discord.Object(id=int(os.getenv("GUILD")))
 MAIN_CHANNEL_ID = int(os.getenv("MAIN_CHANNEL"))
 THE_SHAUS_ID = int(os.getenv("SHAUS_ID"))
 MILO_ID = int(os.getenv("MILO_ID"))
