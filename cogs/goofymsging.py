@@ -23,11 +23,6 @@ class GoofyMsgs(commands.Cog):
         if response:
             await message.channel.send(response)
 
-        #r6s
-        # if ('<@&738831293588045889>' in message.content):
-        #     await message.channel.send(respond(r6_ping_responses))
-        
-
         #got pinged
         if (f'<@{self.bot.user.id}>' in message.content):
             await message.channel.send(pick_response(section="got_pinged_text"))
