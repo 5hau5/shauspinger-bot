@@ -58,8 +58,14 @@ def add_trigger(section: str, new_trigger: str, main: bool = False):
 
 def add_response(section: str, response: str, weight: int, comment: str = "—", main: bool = False):
     config = get_config(main)
+    data = config.get(section, {})
+    responses = data.get("responses", [])
+    if any(resp in response for resp in responses):
+        print("alrdy in the tml")
+        return
     config[section]["responses"].append(response)
     config[section]["weights"].append(weight)
+
     if not main:
         config[section]["comments"].append(comment)
     save_config(config, main)

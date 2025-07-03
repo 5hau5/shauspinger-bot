@@ -133,7 +133,7 @@ async def hydrus(
 
             urls = metadata_json.get("known_urls", [])
             page_url = next(
-                (url for url in urls if "gelbooru" in url or "yande.re" in url or "pixiv" in url or "x post" in url), 
+                (url for url in urls if "gelbooru" in url or "pixiv" in url or "yande.re" in url or "x post" in url), 
                 None
                 )
 

@@ -4,6 +4,7 @@ from discord.ext import commands
 from discord import app_commands, Interaction
 import requests
 from bs4 import BeautifulSoup
+import settings
 
 CODES = {
     "AFN": "Afghan Afghani",
@@ -207,6 +208,7 @@ class Utility(commands.Cog):
             if current in code or current in name.upper()
         ][:10]  # max 10 suggestions
 
+    @app_commands.guilds(settings.GUILD)
     @app_commands.command(name="convert", description="convert currency using live exchange rate")
     @app_commands.describe(
         currency_from="currency code to convert from",
