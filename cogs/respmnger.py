@@ -30,9 +30,6 @@ class ResponseManager(commands.Cog):
         section = category.lower()
         if section not in self.config:
             return await ctx.send(f"category `{section}` does not exist.")
-            
-        # if not comment:
-        #     comment = "---"
 
         comment = comment or "---"
 
@@ -245,7 +242,7 @@ class ResponseManager(commands.Cog):
         for i, (resp, weight) in enumerate(zip(responses, weights)):
             comment = comments[i] if i < len(comments) else "—"
             embed.add_field(
-                name=f"#{i} • weight: {weight}",
+                name=f"#{i+1} • weight: {weight}",
                 value=f"`{resp}`\n*{comment}*",
                 inline=False
             )
