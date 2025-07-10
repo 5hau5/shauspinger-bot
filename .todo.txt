@@ -3,3 +3,4 @@ fix the teto bug
 better logger
 gelbooru and yande searching
 more gambling
+smthn
