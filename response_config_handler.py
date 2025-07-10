@@ -42,7 +42,7 @@ def pick_response(message_content: str = None, section: str = None, main: bool =
                 responses = data.get("responses", [])
                 weights = data.get("weights", [])
 
-                if any(resp in message_lower for resp.lower() in responses):
+                if any(resp.lower() in message_lower for resp in responses):
                     continue
 
                 if responses and weights:
