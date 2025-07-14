@@ -40,6 +40,8 @@ responses = [
     "https://tenor.com/view/tetris-tetris-sex-gif-25857618",
     "https://cdn.discordapp.com/attachments/677548756262060044/1383556936775110769/1749936067580.gif",
     "https://tenor.com/view/mococo-fuwamoco-vtuber-hololive-mococo-lick-gif-16937631731854129467",
+    "https://media.tenor.com/SxeY7J7YZlUAAAAM/patchouli-patchy.gif",
+    "https://media.tenor.com/GHzbpwk3exoAAAAM/fumo-touhou-sex.gif",
 ]
 comments = [
     "arona sex",
@@ -54,8 +56,12 @@ comments = [
     "tetris_sex",
     "tight_kagami",
     "mogojohn_freaky_style",
+    "fumo_remi_stradling",
+    "fumo_aya_straddling",
 ]
 weights = [
+    10,
+    10,
     10,
     10,
     10,
