@@ -207,9 +207,9 @@ class ResponseManager(commands.Cog):
         # fuzzy match
         closest = difflib.get_close_matches(old_trigger, triggers, n=1, cutoff=0.6)
         if closest:
-            await ctx.send(f"`{old_trigger}` not found. did you mean `{closest[0]}`?")
+            await ctx.send(f"`{old_trigger}` cant find. u mean `{closest[0]}`?")
         else:
-            await ctx.send(f"`{old_trigger}` not found and no similar triggers in `{section}`.")
+            await ctx.send(f"`{old_trigger}` cant find and nothing similar in `{section}`.")
 
     @commands.command(
             name="lsres", 
