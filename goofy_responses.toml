@@ -1,6 +1,7 @@
 [r6s]
 triggers = [
     "seegx",
+    "<@&738831293588045889>",
 ]
 responses = [
     "https://cdn.discordapp.com/attachments/746415517350363176/1362732917247184946/yan.gif?ex=6803776d&is=680225ed&hm=296e35890565c0ef3bad94dc4feb62ba082140011fa9e06a5cdc3317a5bc747a&",
@@ -42,6 +43,8 @@ responses = [
     "https://tenor.com/view/mococo-fuwamoco-vtuber-hololive-mococo-lick-gif-16937631731854129467",
     "https://media.tenor.com/SxeY7J7YZlUAAAAM/patchouli-patchy.gif",
     "https://media.tenor.com/GHzbpwk3exoAAAAM/fumo-touhou-sex.gif",
+    "https://cdn.discordapp.com/attachments/1259506387877105715/1395807858821431399/cuck.gif?ex=687bcade&is=687a795e&hm=cd976e3be3358b908b778bebad4936f7ac84603fb07969a5749dae4cbbf9dabe&",
+    "https://cdn.discordapp.com/attachments/738831293864738975/1401153642236612669/umapump.gif?ex=688f3d84&is=688dec04&hm=a64a170fdec369b43184749daaf8460e07a19df1ff0f680ad74f99398f778db6&",
 ]
 comments = [
     "arona sex",
@@ -58,8 +61,12 @@ comments = [
     "mogojohn_freaky_style",
     "fumo_remi_stradling",
     "fumo_aya_straddling",
+    "yui_ritsu_sex",
+    "tokai_teio_backshots",
 ]
 weights = [
+    10,
+    10,
     10,
     10,
     10,
@@ -91,6 +98,10 @@ responses = [
     "https://tenor.com/view/yippee-yippee-gif-teto-teto-kasane-kasane-gif-309203518793187813",
     "https://tenor.com/view/kasane-teto-kasane-teto-ice-cream-gif-8045064054851668588",
     "https://media.tenor.com/KCp-ZpPXVrMAAAAM/kasane-teto-head-pat.gif",
+    "https://tenor.com/view/kasane-teto-hair-drills-gif-15697266705462435161",
+    "https://tenor.com/view/mesmerizer-vocaloid-animated-channel-caststation-kasane-teto-gif-1101485950802010720",
+    "https://tenor.com/view/teto-gif-15521755903912659604",
+    "https://tenor.com/view/fat-teto-plush-teto-plush-3d-model-spin-zoom-gif-2982226713068474936",
 ]
 comments = [
     "teto_crush",
@@ -102,8 +113,16 @@ comments = [
     "teto_yipee",
     "teto_ice_cream",
     "high_quality_teto_plush.png",
+    "teto_drill",
+    "horrified_mes_teto",
+    "teto_sigma",
+    "stupid_squished_teto_plush_stupid_spin_zoom",
 ]
 weights = [
+    10,
+    10,
+    10,
+    10,
     10,
     10,
     10,

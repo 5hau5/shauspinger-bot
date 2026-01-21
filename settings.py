@@ -4,6 +4,7 @@ from logging.config import dictConfig
 import logging
 import pathlib
 import discord
+import json
 
 
 load_dotenv()
@@ -30,6 +31,12 @@ BOT_PFP_SOURCE = "https://www.pixiv.net/en/artworks/111099494"
 
 HYDRUS_API_KEY = os.getenv("HYDRUS_API_KEY")
 HYDRUS_API_URL = "http://127.0.0.1:45869"
+
+CRAFTY_API_KEY = os.getenv("CRAFTY_API_KEY")
+CRAFTY_API_URL = "https://100.99.113.119:8443"
+CRAFTY_SEVER_ID = os.getenv("CRAFTY_SERVER_ID")
+
+ALLOWED_MC_CMD_USERS = json.loads(os.getenv('AllOWED_MC_CMDS_USERS'))
 
 LOGGING_CONFIG = {
     "version":1,

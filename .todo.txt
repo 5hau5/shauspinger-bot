@@ -4,3 +4,6 @@ better logger
 gelbooru and yande searching
 more gambling
 smthn
+fix the trig not updating for listing command
+update the base convert command
+make an re-embed link thingy for twitter and tiktok both by /[/][e]mbed [link] or just getting the link from the previous msg
